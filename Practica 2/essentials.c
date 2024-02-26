@@ -1,9 +1,20 @@
 #include <stdio.h>
 #define MAXI 50
-void desplegarMenu(char * nombre, char * explicacion){
-    //Bienvenida
-    printf("+---|| BIENVENID@ A%S  ||---+\n", nombre); //Como hacer 
-    printf("Este programa %s", explicacion);
+void desplegarMenu(int seccion, char * nombre, char * explicacion){
+    switch (seccion)
+    {
+        case 1: //Bienvenida
+            printf("+---|| BIENVENID@ A%S ||---+\n", nombre); //Como hacer 
+            printf("Este programa %s\n", explicacion);
+            break;
+        case 2: //Terminacion
+            printf("+---|| %s ||---+", explicacion);
+        
+    default:
+        break;
+    }    
+
+    
 }
 int leerEntero(char * indicacionEntrada){
     int verif, entrada;
@@ -21,15 +32,14 @@ int leerEntero(char * indicacionEntrada){
 }
 
 void llenarArregloInt(int arr[], int * nElem){
-    int n;
-    n=0;
-    while (n<MAXI && arr[*nElem] > 0){
-        arr[n] = leerEntero("Ingresa un numero entero: ");
+    *nElem=0;
+    do{
+        arr[*nElem] = leerEntero("Ingresa un numero entero: ");
         if(arr[*nElem]>0)
-            *nElem++;
-    }
-    if(n>=MAXI)
-        printf("------// Has alcanzado el limite de valores para el arreglo\n");
+            nElem+1;
+    }while(*nElem<MAXI && arr[*nElem] > 0);
+    if(*nElem>=MAXI)
+        printf("------// Has alcanzado el limite de valores para el arreglo\n");    
 }
 int busquedaElemento(int v[], int elemento, int * indice){
 
