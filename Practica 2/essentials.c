@@ -4,7 +4,7 @@ void desplegarMenu(int seccion, char * nombre, char * explicacion){
     switch (seccion)
     {
         case 1: //Bienvenida
-            printf("+---|| BIENVENID@ A%S ||---+\n", nombre); //Como hacer 
+            printf("\n\n+---|| BIENVENID@ A%s ||---+\n", nombre); //Como hacer 
             printf("Este programa %s\n", explicacion);
             break;
         case 2: //Terminacion
@@ -25,7 +25,7 @@ int leerEntero(char * indicacionEntrada){
         verif=scanf("%d", &entrada);
         if(verif==0){
             while((c=getchar()) != '\n' && c != EOF);
-            printf("Se esperaba un número entero, ingresa nuevamente por favor: ");
+            printf("Se esperaba un numero entero, ingresa nuevamente por favor: ");
         }
     }while(verif==0);
     return entrada;
@@ -35,11 +35,11 @@ void llenarArregloInt(int arr[], int * nElem){
     *nElem=0;
     do{
         arr[*nElem] = leerEntero("Ingresa un numero entero: ");
-        if(arr[*nElem]>0)
-            nElem+1;
-    }while(*nElem<MAXI && arr[*nElem] > 0);
+        *nElem=*nElem+1;
+    }while(*nElem<MAXI && arr[*nElem-1] > 0);
     if(*nElem>=MAXI)
         printf("------// Has alcanzado el limite de valores para el arreglo\n");    
+    *nElem=*nElem-1;
 }
 int busquedaElemento(int v[], int elemento, int * indice){
 

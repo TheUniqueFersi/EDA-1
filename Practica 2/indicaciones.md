@@ -17,3 +17,6 @@ elaborar un programa que reciba el arreglo y nos diga cuantos numeros entre 10 y
 
 Como hacer el acomodo correcto en los printf con las secuencias de escape
 Hacer bsuqueda e impresion de resultados con recursividad
+
+# ENHANCED
+(*contadorVerdaderos)++; ??por que es diferente que *contadorVerdaderos++;
