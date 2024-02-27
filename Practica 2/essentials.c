@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAXI 50
+#include "essentials.h"
 void desplegarMenu(int seccion, char * nombre, char * explicacion){
     switch (seccion)
     {
@@ -12,9 +12,7 @@ void desplegarMenu(int seccion, char * nombre, char * explicacion){
         
     default:
         break;
-    }    
-
-    
+    }        
 }
 int leerEntero(char * indicacionEntrada){
     int verif, entrada;
@@ -30,7 +28,6 @@ int leerEntero(char * indicacionEntrada){
     }while(verif==0);
     return entrada;
 }
-
 void llenarArregloInt(int arr[], int * nElem){
     *nElem=0;
     do{
@@ -41,7 +38,14 @@ void llenarArregloInt(int arr[], int * nElem){
         printf("------// Has alcanzado el limite de valores para el arreglo\n");    
     *nElem=*nElem-1;
 }
-int busquedaElemento(int v[], int elemento, int * indice){
-
-    
+int busquedaElemento(int v[], int elemento, int * indice, int elementosEnArreglo, char * mensajeCoincidencia){
+    int coincidencia=-1;
+    while (*indice < elementosEnArreglo && coincidencia<0){
+    if(v[*indice] == elemento){
+        coincidencia = *indice;
+        printf("%s", mensajeCoincidencia);
+    }
+    *indice=*indice+1;
+    }
+    return coincidencia;
 }
