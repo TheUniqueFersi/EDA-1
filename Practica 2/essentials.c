@@ -41,11 +41,11 @@ void llenarArregloInt(int arr[], int * nElem){
 int busquedaElemento(int v[], int elemento, int * indice, int elementosEnArreglo, char * mensajeCoincidencia){
     int coincidencia=-1;
     while (*indice < elementosEnArreglo && coincidencia<0){
-    if(v[*indice] == elemento){
-        coincidencia = *indice;
-        printf("%s", mensajeCoincidencia);
-    }
-    *indice=*indice+1;
+        if(v[*indice] == elemento){
+            coincidencia = *indice;
+            printf("%s", mensajeCoincidencia);
+        }
+        *indice=*indice+1;
     }
     return coincidencia;
 }
