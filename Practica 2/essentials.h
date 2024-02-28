@@ -1,5 +1,5 @@
 #define MAXI 50
-void desplegarMenu(int seccion, char * nombre, char * explicacion);
-int leerEntero(char * indicacionEntrada);
-void llenarArregloInt(int arr[], int * nElem);
-int busquedaElemento(int v[], int elemento, int * indice, int elementosEnArreglo, char * mensajeCoincidencia);
+void desplegarMenu(int, char * , char * );
+int leerEntero(char * );
+void llenarArregloInt(int[], int * );
+int busquedaElemento(int v[], int, int * , int, char * );

@@ -1,11 +1,5 @@
 #include <stdio.h>
 #include "essentials.h"
-
-lectura (int v[], int * n){
-    *n = 0;
-
-}
-
 /*
     lea mientras verifica que no esten repetidos
 
@@ -16,7 +10,6 @@ lectura (int v[], int * n){
     La busqueda se repite hasta que el usuario introduzca un valor menor o igual a cero
 
 */
-
 void llenarArregloNoRepetido(int v[], int * indice){
     int indiceFalso = 0, *ptrFalso = &indiceFalso;
     *indice = 0;
@@ -34,15 +27,18 @@ void llenarArregloNoRepetido(int v[], int * indice){
 
 
 int main (void){
-    int listaNoRepetidos[MAXI], indice, maxIndiceValido, valorBusqueda;
+    int listaNoRepetidos[MAXI], indice, valorBusqueda, indiceFalso;
     desplegarMenu(1, "L PROBLEMA 2: =BUSQUEDA DE ELEMENTO EN LISTA NO REPETIDA=", "Identifica si el numero proporcionado esta o no en el arreglo, si esta, indica en que indice");
     llenarArregloNoRepetido(listaNoRepetidos, &indice);
-    if(indice>0){
-        
-        
-        while()//para repetir numero que busque
+    if(indice>0){        
+        while((valorBusqueda=leerEntero("Ingresa un numero que quieras buscar en la lista previamente creada: "))>0){
+            indiceFalso=0;
+            if((busquedaElemento(listaNoRepetidos, valorBusqueda, &indiceFalso, indice, "Este elemento SI se encuentra en la lista previamente dada\n"))<0)
+                printf("Este elemento NO se encuentra en el arreglo perviamente dado\n");
+        }
     } else {
         printf("El arreglo es muy pequeño, vuelve a intentarlo\n");
     }
+    desplegarMenu(2, '\0', "ESTE PROGRAMA HA TERMINADO");
     return 0;
 }
