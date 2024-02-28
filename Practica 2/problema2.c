@@ -34,7 +34,7 @@ int main (void){
         while((valorBusqueda=leerEntero("Ingresa un numero que quieras buscar en la lista previamente creada: "))>0){
             indiceCoincidencia=0;
             if((busquedaElemento(listaNoRepetidos, valorBusqueda, &indiceCoincidencia, indice, "Este elemento SI se encuentra en la lista previamente dada\n"))<0)
-                printf("Este elemento NO se encuentra en el arreglo perviamente dado\n");
+                printf("Este elemento NO se encuentra en el arreglo previamente dado\n");
             else
                 printf("El elemento se encuentra en el indice: [%d] = %d\n", indiceCoincidencia-1, valorBusqueda);
         }
