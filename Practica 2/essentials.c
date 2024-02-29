@@ -14,24 +14,24 @@ void desplegarMenu(int seccion, char * nombre, char * explicacion){
         break;
     }        
 }
-int leerEntero(char * indicacionEntrada){
+int leerEntero(char * mensajeEntrada, char * mensajeError){
     int verif, entrada;
     char c;
     do{
-        printf("%s", indicacionEntrada);
+        printf("%s", mensajeEntrada);
         fflush(stdin);
         verif=scanf("%d", &entrada);
         if(verif==0){
             while((c=getchar()) != '\n' && c != EOF);
-            printf("Se esperaba un numero entero, ingresa nuevamente por favor: ");
+            printf("%s", mensajeError);
         }
     }while(verif==0);
     return entrada;
 }
-void llenarArregloInt(int arr[], int * nElem){
+void llenarArregloInt(int arr[], int * nElem, char * mensajeEntrada, char * mensajeError){
     *nElem=0;
     do{
-        arr[*nElem] = leerEntero("Ingresa un numero entero: ");
+        arr[*nElem] = leerEntero(mensajeEntrada, mensajeError);
         *nElem=*nElem+1;
     }while(*nElem<MAXI && arr[*nElem-1] > 0);
     if(*nElem>=MAXI)
