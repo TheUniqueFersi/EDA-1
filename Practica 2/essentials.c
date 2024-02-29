@@ -36,7 +36,8 @@ void llenarArregloInt(int arr[], int * nElem, char * mensajeEntrada, char * mens
     }while(*nElem<MAXI && arr[*nElem-1] > 0);
     if(*nElem>=MAXI)
         printf("------// Has alcanzado el limite de valores para el arreglo\n");    
-    *nElem=*nElem-1;
+    if(*nElem!=MAXI || arr[*nElem-1]==0)
+        *nElem=*nElem-1;
 }
 int busquedaElemento(int v[], int elemento, int * indice, int elementosEnArreglo, char * mensajeCoincidencia){
     int coincidencia=-1;
