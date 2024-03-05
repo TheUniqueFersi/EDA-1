@@ -1,6 +1,6 @@
 /* --[ Estas funciones se asemejan a string.h, pero lo hacemos a la antigua ]--*/
 #include <stdio.h>
-#include "stringManipulation.h"
+//#include "stringManipulation.h"
 
 int strlenMX(char * s){//Es lo mismo que 'char s[]'
     int n;
