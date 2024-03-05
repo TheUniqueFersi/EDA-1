@@ -1,6 +1,6 @@
 //-----> Manipulación de cadenas {29-02-2024}
 #include <stdio.h>
-//#include <string.h>
+#include <stdlib.h>
 
 #include "menus.c"
 //#include "menus.h"
@@ -30,14 +30,24 @@ int main(void){
             case 1:
                 printf("Has entrado a la opcion \"1) CONVERTIR CADENA A MAYUCULAS\"\n");
                 printf("Ingresa una cadena que quieras transformar a MAYUSCULAS: ");
-                fgets(cadena, MAX, stdin);//Corta en el MAX-ésimo y reemplaza dicho caracter por \0 si es que la cadena es mas grande
-                printf("%s\n", cadena);
-
-                stringToUpper(cadena);
-                printf("La cadena convertida es: %s", cadena);
+                fgets(cadena, MAX, stdin);//Corta en el MAX-ésimo y reemplaza dicho caracter por \0 si es que la cadena es mas grande (por ende no se desborda la memoria)
+                //--TODO: MENSAJE CADENA SE EXECEDE DE LA LONGITUD MAXIMA
+                //printf("%s\n", cadena);
+                stringToUpper(cadena); //reemplazar por la otra funcion pro?
+                printf("La cadena convertida es: %s\n", cadena);
                 break;
             case 2:
                 printf("Has entrado a la opcion \"2) CONVERTIRCADENA NUMERICA A NUMERO (atoi CASERO)\"\n");
+                bufferflush();
+                fgets(cadena, MAX, stdin);//Corta en el MAX-ésimo y reemplaza dicho caracter por \0 si es que la cadena es mas grande (por ende no se desborda la memoria)
+                
+                printf("\n%d\n", sizeof(int));
+                int entero;
+                stoi(cadena);
+                scanf("%d", &entero);
+                printf("%d\n\n", entero);
+                printf("ATOI: %d", atoi(cadena));
+
                 break;
             case 3: 
                 printf("Has entrado a la opcion \"3) UNIR DOS CADENAS EN UNA TERCERA\"\n");

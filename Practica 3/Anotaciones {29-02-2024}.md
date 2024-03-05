@@ -32,13 +32,14 @@ Funciones para entrada de datos:
 # PROBLEMAS
 
 ## TOUPPER
+Programa que pida una cadena y convierta los caracteres en minúsculas en mayúsculas
 
-## LEER UNA CADENA DE CARACTERES DEL TECLADO
+## Convertir una cadena de numeros en su número entero respectivo (int)
 Debe contener solamente numeros
 Transforme la cadena a un numero entero
 char[] "76984" -> int 76984
 
 ## Unir cadenas (strcat)
 `strcatMX(char fte1[], fte2[], res[]);`
-Dos cadenas de caracteres
+Programa que una dos cadenas de caracteres en una, reemplazar el caracter nulo del final de la primer cadena, con el inicio de la segunda cadena, de tal forma que solo haya un caracter nulo (el del final de la segunda cadena, ahora única cadenau nida)
 

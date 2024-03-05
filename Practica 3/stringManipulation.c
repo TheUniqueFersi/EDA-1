@@ -1,5 +1,6 @@
 /* --[ Estas funciones se asemejan a string.h, pero lo hacemos a la antigua ]--*/
 #include <stdio.h>
+#include <math.h>
 //#include "stringManipulation.h"
 
 int strlenMX(char * s){//Es lo mismo que 'char s[]'
@@ -36,3 +37,28 @@ void stringToUpperOrLower(char * cadena, int caso){ //caso>=1
     } else
         printf("Tu cadena esta vacia\n");
 }
+
+int stoi(char * cadena){//stringToInt
+    int longitud, k, numeroEntero, maxIntPosible;
+    longitud=strlenMX(cadena);
+    k=0;
+    printf("long: %d\n", longitud);
+    printf("%d\n", (int)pow(2,8*sizeof(int)));
+    maxIntPosible = ((int)pow(2,8*sizeof(int)));//Hal alguna forma de saber si una compu no utiliza 8 bits?
+    printf("MAX: %d\n", maxIntPosible);
+    //maxIntPosible/=2;
+    //printf("%d\n", maxIntPosible);
+    if(longitud>0){
+        printf("%f\n", pow(10, (longitud-1)));
+        while(cadena[k] != 0){
+            if(pow(10, (longitud-1)) > maxIntPosible)
+                printf("WTFFFD");
+
+            
+            k++;
+        }
+        
+    }
+} 
+//2147483647 -> numero maximo
+
