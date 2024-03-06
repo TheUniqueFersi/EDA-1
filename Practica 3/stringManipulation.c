@@ -1,7 +1,7 @@
 /* --[ Estas funciones se asemejan a string.h, pero lo hacemos a la antigua ]--*/
 #include <stdio.h>
 #include <math.h>
-//#include "stringManipulation.h"
+#include "stringManipulation.h"
 
 int strlenMX(char * s){//Es lo mismo que 'char s[]'
     int n;
@@ -55,41 +55,30 @@ int ctoi(char caracter){
 
 int stoi(char * cadena){//stringToInt
     int longitud, k, numeroEntero, maxIntPosible, iInicioNumero;
+    int ciclos, ciclosN, p=0;
     longitud=strlenMX(cadena);
     k=0;
     numeroEntero=0;
     iInicioNumero=0;
-    // printf("long: %d\n", longitud);
-    // printf("%d\n", (int)pow(2,8*sizeof(int)));
     maxIntPosible = ((int)pow(2,8*sizeof(int)));//Hal alguna forma de saber si una compu no utiliza 8 bits?
-    printf("MAX: %d\n", maxIntPosible);
-    //maxIntPosible/=2;
-    //printf("%d\n", maxIntPosible);
-    int ciclos, ciclosN, p=0;
     if(longitud>0 && isANumber(cadena)!=0){
-        //printf("%f\n", pow(10, (longitud-1)));
         if(isANumber(cadena)==-1){
             iInicioNumero = 1;
         }            
         do{
             ciclos = 0;
             ciclosN = (ctoi(cadena[longitud-1]))*10;
-            printf("ciclosN: %d\n", ciclosN);
             if(p!=0){
                 do{
-                    printf("DEP: valor de sumas%d\n", (int)pow(10, p-1));
                     numeroEntero = numeroEntero + ((int)pow(10, p-1));
                     ciclos++;
                 }while(ciclos<ciclosN && numeroEntero>0);
             } else {
                 do{
-                    printf("DEP: valor de sumas%d\n", (int)pow(10, p-1));
                     numeroEntero = numeroEntero + 1;
                     ciclos+=10;
                 }while(ciclos<ciclosN && numeroEntero>0);
-            } 
-            
-            printf("LOL: %d\n", numeroEntero);
+            }
             p++;
             longitud--;
         }while(longitud!=iInicioNumero && numeroEntero>0);
@@ -107,7 +96,6 @@ void stringsConcat(char * s1, char * s2, char * sr){
     int size1, size2, k;
     size1 = strlenMX(s1);
     size2 = strlenMX(s2);
-    //printf("Tamanios: %d,  %d", size1, size2);
     k=0;
     while(k<size1){
         sr[k] = s1[k];

@@ -1,10 +1,9 @@
 #include <stdio.h>
-//#include "essentials.h"
+#include "essentials.h"
 void bufferflush(){
     char c;
     while((c=getchar()) != '\n' && c != EOF);
 }
-
 int leerEntero(char * mensajeEntrada, char * mensajeError){
     int verif, entrada;
     do{

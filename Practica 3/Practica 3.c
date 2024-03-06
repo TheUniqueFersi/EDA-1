@@ -1,18 +1,9 @@
 //-----> Manipulación de cadenas {29-02-2024}
 #include <stdio.h>
-#include <stdlib.h>
-
-#include "menus.c"
-//#include "menus.h"
-
-#include "essentials.c"
-//#include "essentials.h"
-
-//#include "stringManipulation.c"
-//#include "stringManipulation.h"
-
-#define MAX 5
-
+#include "menus.h"
+#include "essentials.h"
+#include "stringManipulation.h"
+#define MAX 50
 int main(void){
     char cadena[MAX];
     int largoMenu, opcionMenu;
@@ -30,6 +21,7 @@ int main(void){
             case 1:
                 printf("Has entrado a la opcion \"1) CONVERTIR CADENA A MAYUCULAS\"\n");
                 printf("Ingresa una cadena que quieras transformar a MAYUSCULAS: ");
+                bufferflush();
                 fgets(cadena, MAX, stdin);//Corta en el MAX-ésimo y reemplaza dicho caracter por \0 si es que la cadena es mas grande (por ende no se desborda la memoria)
                 //--TODO: MENSAJE CADENA SE EXECEDE DE LA LONGITUD MAXIMA
                 //printf("%s\n", cadena);
@@ -42,22 +34,22 @@ int main(void){
                 do{
                     printf("Ingresa una cadena numerica: ");
                     fgets(cadena, MAX, stdin);//Corta en el MAX-ésimo y reemplaza dicho caracter por \0 si es que la cadena es mas grande (por ende no se desborda la memoria)
-                    if(isANumber(cadena)){
+                    if(isANumber(cadena)==0){
                         printf("Esto no es una cadena numerica, solo se acepta un numero sin signo (positivo), o con '-' al principio indicando que es negativo.\nEj. \"123\" o \"-123\"\n");
                     }
                 }while(isANumber(cadena)==0);                
-                printf("La cadena en numero es: %d\n Se demuestra dividiendo el mismo entre 2: %d", stoi(cadena), stoi(cadena)/2);
+                printf("La cadena en numero es: %d\n Se demuestra dividiendo el mismo entre 2: %d\n", stoi(cadena), stoi(cadena)/2);
                 break;
             case 3: 
                 printf("Has entrado a la opcion \"3) UNIR DOS CADENAS EN UNA TERCERA\"\n");
                 bufferflush();
                 printf("Ingresa la primer cadena: ");
                 fgets(cadena1, MAX, stdin);
-                bufferflush();
+                //bufferflush();
                 printf("Ingresa la segunda cadena: ");
                 fgets(cadena2, MAX, stdin);
                 stringsConcat(cadena1, cadena2, cadena3);
-                printf("La cadena concatenada es: %s", cadena3);
+                printf("La cadena concatenada es: %s\n", cadena3);
                 break;
             case 0: 
                 printf("SALIENDO DEL PROGRAMA...\n");

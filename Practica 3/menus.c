@@ -1,10 +1,6 @@
 #include <stdio.h>
-//#include "menus.h"
-
-//#include "stringManipulation.h"
-#include "stringManipulation.c"
-
-#define mitadMenu 20
+#include "menus.h"
+#include "stringManipulation.h"
 
 void desplegar(int menu, char * cadena1, char* cadena2, int * largoMenu){
     int k;
@@ -21,7 +17,6 @@ void desplegar(int menu, char * cadena1, char* cadena2, int * largoMenu){
                 *largoMenu=*largoMenu+1;
             }
             *largoMenu=*largoMenu+strlenMX(cadena1)+4;
-            printf("DEP: %i", *largoMenu);
             printf("+\n+ -> BIENVENID@%s!+\n", cadena2);
             break;
         case 2://Opciones
