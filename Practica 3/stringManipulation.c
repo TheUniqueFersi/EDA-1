@@ -103,3 +103,19 @@ int stoi(char * cadena){//stringToInt
 } 
 //2147483647 -> numero maximo
 
+void stringsConcat(char * s1, char * s2, char * sr){
+    int size1, size2, k;
+    size1 = strlenMX(s1);
+    size2 = strlenMX(s2);
+    //printf("Tamanios: %d,  %d", size1, size2);
+    k=0;
+    while(k<size1){
+        sr[k] = s1[k];
+        k++;
+    }
+    while(k<size1+size2){
+        sr[k] = s2[k-size1];
+        k++;
+    }
+    sr[k] = '\0';
+}

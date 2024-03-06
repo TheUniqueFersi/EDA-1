@@ -11,15 +11,15 @@
 //#include "stringManipulation.c"
 //#include "stringManipulation.h"
 
-#define MAX 50
+#define MAX 5
 
 int main(void){
     char cadena[MAX];
     int largoMenu, opcionMenu;
     char opciones[] = "+ 0) SALIR\n+ 1) Convertir cadena a mayusculas\n+ 2) Convertir cadena numerica en numero ('atoi' casero)\n+ 3) Unir dos cadenas en una tercera\n";
     desplegar(1, "PRACTICA 3 - EDA I", "\0", &largoMenu);
+    char cadena1[MAX], cadena2[MAX], cadena3[MAX*2];
     
-    //Esto es un ejemplo de MENU
     do{
         desplegar(0, 0, 0, &largoMenu);//SEPARADOR
         desplegar(2, opciones, "\0", NULL);
@@ -37,28 +37,27 @@ int main(void){
                 printf("La cadena convertida es: %s\n", cadena);
                 break;
             case 2:
-                printf("Has entrado a la opcion \"2) CONVERTIRCADENA NUMERICA A NUMERO (atoi CASERO)\"\n");
+                printf("Has entrado a la opcion \"2) CONVERTIR CADENA NUMERICA A NUMERO (atoi CASERO)\"\n");
                 bufferflush();
-                fgets(cadena, MAX, stdin);//Corta en el MAX-ésimo y reemplaza dicho caracter por \0 si es que la cadena es mas grande (por ende no se desborda la memoria)
-                
-                printf("\n%d\n", sizeof(int));
-                int entero;
-                stoi(cadena);
-                scanf("%d", &entero);
-                printf("%d\n\n", entero);
-                printf("ATOI: %d", atoi(cadena));
-
+                do{
+                    printf("Ingresa una cadena numerica: ");
+                    fgets(cadena, MAX, stdin);//Corta en el MAX-ésimo y reemplaza dicho caracter por \0 si es que la cadena es mas grande (por ende no se desborda la memoria)
+                    if(isANumber(cadena)){
+                        printf("Esto no es una cadena numerica, solo se acepta un numero sin signo (positivo), o con '-' al principio indicando que es negativo.\nEj. \"123\" o \"-123\"\n");
+                    }
+                }while(isANumber(cadena)==0);                
+                printf("La cadena en numero es: %d\n Se demuestra dividiendo el mismo entre 2: %d", stoi(cadena), stoi(cadena)/2);
                 break;
             case 3: 
                 printf("Has entrado a la opcion \"3) UNIR DOS CADENAS EN UNA TERCERA\"\n");
                 bufferflush();
-                fgets(cadena, MAX, stdin);
-                // printf("%d", isANumber(cadena));
-
-                printf("La cadena en numero es: %d", stoi(cadena));
-
-                // int a = -2147483649, b=1000000000;
-                // printf("%d", a);
+                printf("Ingresa la primer cadena: ");
+                fgets(cadena1, MAX, stdin);
+                bufferflush();
+                printf("Ingresa la segunda cadena: ");
+                fgets(cadena2, MAX, stdin);
+                stringsConcat(cadena1, cadena2, cadena3);
+                printf("La cadena concatenada es: %s", cadena3);
                 break;
             case 0: 
                 printf("SALIENDO DEL PROGRAMA...\n");
