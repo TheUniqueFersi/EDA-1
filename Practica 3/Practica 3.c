@@ -51,6 +51,14 @@ int main(void){
                 break;
             case 3: 
                 printf("Has entrado a la opcion \"3) UNIR DOS CADENAS EN UNA TERCERA\"\n");
+                bufferflush();
+                fgets(cadena, MAX, stdin);
+                // printf("%d", isANumber(cadena));
+
+                printf("La cadena en numero es: %d", stoi(cadena));
+
+                // int a = -2147483649, b=1000000000;
+                // printf("%d", a);
                 break;
             case 0: 
                 printf("SALIENDO DEL PROGRAMA...\n");
