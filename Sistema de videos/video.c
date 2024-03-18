@@ -3,11 +3,12 @@
 
 void imprime(struct Video v) {
     char unaFecha[20];
-    printf("Nombre: %s\n",v.nombre);
+    printf("===[%s]===\n",v.nombre);
     printf("Duracion: %0.2f\n",v.duracion);
     printf("Fecha: %s\n",strFecha(unaFecha,v.fecha));
     printf("Calidad: %s\n",v.calidad);
-    printf("%d veces visto",v.n_rep);
+    printf("%d veces visto\n",v.n_rep);
+    printf("----------------------------\n\n");
 }
 
 char *strFecha(char cadena[], struct Fecha f) {

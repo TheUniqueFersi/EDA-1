@@ -76,7 +76,7 @@ void borrarVideo(struct ListaVideos *lista, char *nombre) {
          }
       } else if(resBusq == NULL)
          printf("!! ERR: Hubo un error en memoria\n");
-      else if(resBusq == 0)
+      else if(*resBusq == 0)
          printf("No hay algun video con ese nombre\n");
    }  
 }

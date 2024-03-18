@@ -1,9 +1,10 @@
+#include "EDA.h"
 struct Fecha {
     int dia, mes, anio;
 };
 
 struct Video {
-    char nombre[80];
+    char nombre[MAXstring];
     float duracion;
     struct Fecha fecha;
     char calidad[10];

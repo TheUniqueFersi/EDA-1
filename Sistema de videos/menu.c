@@ -18,7 +18,7 @@ int eligeOpcion() {
         res = scanf("%d",&opcion);
         if (res!=1 || opcion<0 || opcion >5) {
             while (getchar()!='\n'); // limpia el buffer de teclado
-            printf("Opcion invalida o error en la entrada");
+            printf("Opcion invalida o error en la entrada\n");
         } else
             bandera = 1;
     } while (bandera == 0);
@@ -27,21 +27,26 @@ int eligeOpcion() {
 
 void ejecutaMenu() {
     int opcion, *manejarResultadosBusqueda;
+    char nombreVideo[MAXstring];
     struct Video v;
     struct ListaVideos misVideos;
     misVideos.nVideos = 0;
-    char *nombreVideo = "Lol";
+    
     do {
         opcion = eligeOpcion();
         switch (opcion) {
             case 1: imprimeLista(&misVideos);
                     break;
             case 2: v = leer();
-                    agregarVideo(&misVideos,v);
+                    agregarVideo(&misVideos, v);
                     break;
             case 3: //printf("Opcion: %d\n",opcion);
+                    leerString(nombreVideo, "Ingresa el titulo del video que quieres borrar: ");
+                    borrarVideo(&misVideos, nombreVideo);
+                    break;
+            case 4: //printf("Opcion: %d\n",opcion);
+                    leerString(nombreVideo, "Ingresa el titulo del video que quieres buscar: ");
                     manejarResultadosBusqueda = buscarVideo(&misVideos, nombreVideo);
-                    //printf("DEP: %d %d\n", *manejarResultadosBusqueda, manejarResultadosBusqueda[1]);
                     if(manejarResultadosBusqueda != NULL && *manejarResultadosBusqueda!=0){
                         if(*manejarResultadosBusqueda == 1){
                             imprime(misVideos.arreglo[manejarResultadosBusqueda[1]]);
@@ -50,12 +55,8 @@ void ejecutaMenu() {
                         }
                     } else if(manejarResultadosBusqueda == NULL)
                         printf("!! ERR: Hubo un error en memoria\n");
-                    else if(manejarResultadosBusqueda == 0)
+                    else if(*manejarResultadosBusqueda == 0)
                         printf("No hay algun video con ese nombre\n");
-                    break;
-            case 4: //printf("Opcion: %d\n",opcion);
-                    borrarVideo(&misVideos, nombreVideo);
-                    
                     break;
             case 5: printf("Gracias por usar este sistema\n");
                     break;
