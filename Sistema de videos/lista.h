@@ -9,3 +9,6 @@ void imprimeLista(struct ListaVideos *lista);
 void agregarVideo(struct ListaVideos *lista, struct Video v);
 void borrarVideo(struct ListaVideos *lista, char *nombre);
 
+int *buscarVideo(struct ListaVideos *lista, char *nombre);
+
+int verifEliminacion(int k);
