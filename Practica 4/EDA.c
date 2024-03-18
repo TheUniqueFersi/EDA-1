@@ -1,5 +1,6 @@
 //--- Funciones hechas a lo largo de las prácticas previas y añadidos de la actual ---
 #include <stdio.h>
+#include <string.h>
 //Previas
 void bufferflush(){
     char c;
@@ -7,6 +8,9 @@ void bufferflush(){
 }
 int leerEntero(char * mensajeEntrada, char * mensajeError){
     int verif, entrada;
+    char *mensajeDefault = "Se esperaba un entero, intente de nuevo - ";
+    if(mensajeError == NULL)
+        mensajeError = mensajeDefault;
     do{
         printf("%s", mensajeEntrada);
         fflush(stdin);
@@ -18,5 +22,13 @@ int leerEntero(char * mensajeEntrada, char * mensajeError){
     }while(verif==0);
     return entrada;
 }
-
-//Anteriores
+//Nuevas (Esta práctica)
+void rem1SaltoLinea(char * cadena){
+    int k, tamanio;
+    k=0;
+    while(cadena[k] != 0){
+        k++;
+        if(cadena[k]=='\n')
+            cadena[k] = '\0';
+    }
+}

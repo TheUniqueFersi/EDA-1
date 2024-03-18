@@ -1,0 +1,1 @@
+void dLineaHoriz(char caracter);
