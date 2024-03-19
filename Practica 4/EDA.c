@@ -1,7 +1,9 @@
 //--- Funciones hechas a lo largo de las prácticas previas y añadidos de la actual ---
 #include <stdio.h>
 #include <string.h>
-//Previas
+#include <math.h>
+//=== Previas ===
+
 void bufferflush(){
     char c;
     while((c=getchar()) != '\n' && c != EOF);
@@ -22,6 +24,32 @@ int leerEntero(char * mensajeEntrada, char * mensajeError){
     }while(verif==0);
     return entrada;
 }
+// stringManipulation.h
+int strlenMX(char * s){//Es lo mismo que 'char s[]'
+    int n;
+    n=0;
+    while(s[n]!=0 && s[n]!='\n')
+        n=n+1;    
+    return n;
+}
+int isANumber(char * cadena){
+    int esUnNumero, k;
+    esUnNumero = (cadena[0]=='-')? -1:1;
+    k = (cadena[0]=='-')? 1:0;
+    while(cadena[k]!='\0' && cadena[k]!='\n'){
+        if(!(cadena[k] >= '0' && cadena[k] <= '9'))
+            esUnNumero = 0;
+        k++;
+    }
+    return esUnNumero;
+}
+
+int ctoi(char caracter){
+    return caracter - 48;
+}
+
+
+
 //Nuevas (Esta práctica)
 void rem1SaltoLinea(char * cadena){
     int k, tamanio;
@@ -32,3 +60,61 @@ void rem1SaltoLinea(char * cadena){
             cadena[k] = '\0';
     }
 }
+
+
+
+//DEPRECATED
+int stoi(char * cadena){//stringToInt
+    int longitud, k, numeroEntero, maxIntPosible, iInicioNumero;
+    int ciclos, ciclosN, p=0;
+    longitud=strlenMX(cadena);
+    k=0;
+    numeroEntero=0;
+    iInicioNumero=0;
+    maxIntPosible = ((int)pow(2,8*sizeof(int)));//Hal alguna forma de saber si una compu no utiliza 8 bits?
+    if(longitud == 1 && *cadena == '0')
+        numeroEntero = 0;
+    else if((longitud>0 && isANumber(cadena)!=0)){
+        if(isANumber(cadena)==-1){
+            iInicioNumero = 1;
+        }
+        do{
+            ciclos = 0;
+            ciclosN = (ctoi(cadena[longitud-1]))*10;
+            if(p!=0){
+                do{
+                    numeroEntero = numeroEntero + ((int)pow(10, p-1));
+                    ciclos++;
+                }while(ciclos<ciclosN && numeroEntero>0);
+            } else {
+                do{
+                    numeroEntero = numeroEntero + 1;
+                    ciclos+=10;
+                }while(ciclos<ciclosN && numeroEntero>0);
+            }
+            p++;
+            longitud--;
+        }while(longitud!=iInicioNumero && numeroEntero>0);
+        if(numeroEntero<0)
+            numeroEntero = maxIntPosible;
+        else
+            if(isANumber(cadena)==-1)
+                numeroEntero*=-1;
+    }
+    return numeroEntero;
+} 
+//2147483647 -> numero maximo
+
+// printf("%d %d\n", isANumber("0"), stoi("0"));
+//     printf("%d %d\n", isANumber("-1"), stoi("-1"));
+//     printf("%d %d\n", isANumber("10"), stoi("10"));
+//     printf("%d %d\n", isANumber("100"), stoi("100"));
+//     printf("%d %d\n", isANumber("10000"), stoi("12943"));
+//     printf("%d %d\n", isANumber("10001"), stoi("100001"));
+//     printf("%d %d\n", isANumber("a"), stoi("a"));
+//     printf("%d %d\n", isANumber("1"), stoi("1"));
+//     printf("%d %d\n", isANumber("12222222222222222"), stoi("12222222222222"));
+//     printf("%d %d\n", isANumber("hoa211kw"), stoi("hoa211k"));
+//     printf("%d %d\n", isANumber("-12fff"), stoi("-12fff"));
+//     printf("%d %d\n", isANumber("00f"), stoi("00f"));
+//     printf("%d %d\n", isANumber("lol"), stoi("alol"));

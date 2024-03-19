@@ -19,9 +19,9 @@ void registrarPartido(struct Equipo *loc, struct Equipo *vis){
     do{
         printf("Quien gano el encuentro? (1): Local\t(2): Visitante\t(3): Empataron\n");
         entrada = leerEntero("Ingresa una opcion: ", NULL);
-        if(entrada < 1 && entrada > 3)
+        if(!(entrada >= 1 && entrada <= 3))
             printf("Opcion invalida\n");
-    }while(entrada < 1 && entrada > 3);
+    }while(!(entrada >= 1 && entrada <= 3));
     if(entrada == 1){ 
         loc->pts+=2;
         loc->juegosGanados++;
@@ -56,6 +56,7 @@ int main(void) {
         switch (entrada){
             case 0:
                 printf("Saliendo del programa ...\n");
+                break;
             case 1:
                 registrarPartido(&local, &visitante);
             case 2:
@@ -92,11 +93,11 @@ struct Equipo leer (char texto []){
 }
 
 void imprime (struct Equipo e){
-    printf("\n\n%-10s tiene %03d pts\n", e.nombre, e.pts);
+    printf("\n%-10s tiene %03d pts\n", e.nombre, e.pts);
     // --TODO Hacer en formato tabla
     printf("Juegos Ganados: %d\n", e.juegosGanados);
     printf("Juegos perdidos: %d\n", e.juegosPerdidos);
     printf("Juegos empatados: %d\n", e.juegosEmpatados);
 
-    printf("Efectividad del equipo: %.2f%\n", efectividad(e));
+    printf("Efectividad del equipo: %.2f%%\n", efectividad(e));
 }
