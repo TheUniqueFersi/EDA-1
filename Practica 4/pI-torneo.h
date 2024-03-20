@@ -1,5 +1,5 @@
 #define MAXs 10
-#define NEQUIPOS 10
+#define NEQUIPOS 2
 struct Equipo {
     char nombre [MAXs];
     int pts;
