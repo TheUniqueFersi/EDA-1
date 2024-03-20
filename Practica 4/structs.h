@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define LECT_BIN "rb"
 #define LECT_BIN_PLUS "rb+"
+#define LECT_A_BIN "ab"
 #define DEFAULT 0
 #define DEPUR 1 //definir en 0 si se requiere que los mensajes de depuracion se desactiven
 int contadorBytesArch(char *ruta){
@@ -23,7 +24,7 @@ FILE *manejarAperturaArchivo(char *ruta, char *t_apertura){
     return arch;
 }
 int select(char *ruta, void *registro_en_codigo, size_t tam_elem, size_t num_elem){
-    FILE *arch = manejarAperturaArchivo(ruta, LECT_BIN);
+    FILE *arch = manejarAperturaArchivo(ruta, LECT_A_BIN);
     if(arch!=NULL){
         rewind(arch);
         fread(registro_en_codigo, tam_elem, num_elem, arch);
