@@ -1,7 +1,8 @@
 #include "video.h"
+#define MAXARR 10
 
 struct ListaVideos {
-    struct Video arreglo[100];
+    struct Video arreglo[MAXARR];
     int nVideos;
 };
 

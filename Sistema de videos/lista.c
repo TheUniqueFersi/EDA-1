@@ -10,21 +10,26 @@
 void imprimeLista(struct ListaVideos *lista) {
    int k;
    if ((*lista).nVideos == 0){
-      printf("No hay videos registrados\n\n");
+      printf("No hay videos registrados\n");
       return;
    }
    for (k=0;k<(*lista).nVideos; k++) {
-      //printf("Video: %s\n",(*lista).arreglo[k].nombre);
       imprime(lista->arreglo[k]);
    }
+   printf("Hay %d video%c\n", lista->nVideos, (lista->nVideos == 1)? 0: 's');
 
 }
 
 void agregarVideo(struct ListaVideos *lista, struct Video v) {
    int nx;
-   nx = (*lista).nVideos;
-   (*lista).arreglo[nx] = v;
-   (*lista).nVideos += 1;
+   if(lista->nVideos != MAXARR){
+      nx = (*lista).nVideos;
+      (*lista).arreglo[nx] = v;
+      (*lista).nVideos += 1;
+   } else {
+      printf("\n\n!!!!\nLa lista de videos esta llena\nPrimero borre algun video para poder añadir otro\n");
+   }
+   
 }
 
 int *buscarVideo(struct ListaVideos *lista, char *nombre) {
@@ -51,28 +56,31 @@ int *buscarVideo(struct ListaVideos *lista, char *nombre) {
 
 void borrarVideo(struct ListaVideos *lista, char *nombre) {
    int *resBusq, idVideo, indiceBusqueda, k;
-   if(lista->nVideos==0){
-      printf("No hay videos que borrar\n");
-   } else {
+   //printf("DEP: %d\n", lista->nVideos);
+   if(lista->nVideos!=0){
       resBusq = buscarVideo(lista, nombre);
       if(resBusq != NULL && *resBusq!=0){
          if(*resBusq > 1){
-               imprimir_Elem_pseudo_cola(resBusq, "Estos son los indices de elementos dentro del arreglo de videos que tienen ese mismo nombre. Cual quieres borrar? (Indica uno de los indices proporcionados): ");
+            imprimir_Elem_pseudo_cola(resBusq, "Estos son los indices de elementos dentro del arreglo de videos que tienen ese mismo nombre. Cual quieres borrar? (Indica uno de los indices proporcionados): ");
+            do{
+               indiceBusqueda = 0;
+               idVideo = leerEntero("Ingresa algun indice de los videos con coincidencia de titulo: ", "Se esperaba un entero, intenta de nuevo - ");
+               if(busquedaElemento(&resBusq[1], idVideo, &indiceBusqueda, *resBusq, "\0")==-1){
+                  printf("El elemento proporcionado no es uno de los indices proporcionado en la lista.\nSe proporciona de nuevo:\n\t");
+                  imprimir_Elem_pseudo_cola(resBusq, "Indices de videos con el mismo nombre: \n");
+                  idVideo = -1;
+               }
+            } while (idVideo == -1);
          }
-         do{
-            indiceBusqueda = 0;
-            idVideo = leerEntero("Ingresa algun indice de los videos con coincidencia de titulo: ", "Se esperaba un entero, intenta de nuevo - ");
-            if(busquedaElemento(&resBusq[1], idVideo, &indiceBusqueda, *resBusq, "\0")==-1){
-               printf("El elemento proporcionado no es uno de los indices proporcionado en la lista.\nSe proporciona de nuevo:\n\t");
-               imprimir_Elem_pseudo_cola(resBusq, "Indices de videos con el mismo nombre: \n");
-               idVideo = -1;
-            }
-         } while (idVideo == -1);
-         if (verifEliminacion(idVideo)){//Si el usuario verifica con (y)es si eliminación
+         
+         if (verifEliminacion((*resBusq > 1)? idVideo:resBusq[1])){//Si el usuario verifica con (y)es si eliminación
             //recorrer elementos
-            for(k=idVideo; k<(lista->nVideos-1); k++)
+            for(k=(*resBusq > 1)? idVideo:resBusq[1]; k<(lista->nVideos-1); k++)
                lista->arreglo[k] = lista->arreglo[k+1];
             lista->nVideos--;
+            printf("\nEl video se ha eliminado exitosamente");
+         } else {
+            printf("\nABORTANDO ELIMINACION...");
          }
       } else if(resBusq == NULL)
          printf("!! ERR: Hubo un error en memoria\n");
@@ -83,7 +91,7 @@ void borrarVideo(struct ListaVideos *lista, char *nombre) {
 int verifEliminacion(int k){
    char entrada;
    do{
-      printf("Seguro que quieres elminar el elemento %d de la lista de videos? (Y/N)", k);
+      printf("Seguro que quieres elminar el video %d de la lista de videos? (Y/N)", k+1);
       bufferflush();
       entrada = getchar();
       entrada = tolower(entrada);
