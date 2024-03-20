@@ -116,7 +116,7 @@ int main(void) {
                 registrarPartido(&torneo);
             case 2:
                 dLineaHoriz('-');
-                imprimirEquipos(&torneo);
+                imprimirEquipos(&torneo, IMP_NORMAL);
                 dLineaHoriz('-');
                 break;
             default:

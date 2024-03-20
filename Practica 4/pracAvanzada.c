@@ -4,6 +4,7 @@
 #include "EDA.h"
 #include "menu.h"
 #include "pI-torneo.h"
+#include "arch_manager.h"
 
 int entradaEquipoExistente(char * cadena, char *mensaje){
     int entrada;
@@ -44,7 +45,7 @@ void actualizarPromediosTorneo(struct Torneo *t){
 void registrarPartido(struct Torneo *torneo){
     int indE1, indE2, entrada;
     char cadena1[MAXs], cadena2[MAXs];
-    indE1 = entradaEquipoExistente(cadena1, "Ingresa algun equipo (numero): ");
+    indE1 = entradaEquipoExistente(cadena1, "Ingresa algun equipo (numero de la tabla de la opcion 2): ");
     do{
         indE2 = entradaEquipoExistente(cadena2, "Ingresa el equipo contra el que va a enfrentarse (numero): ");
         if(indE1 == indE2)
@@ -55,7 +56,7 @@ void registrarPartido(struct Torneo *torneo){
         printf("Quien gano el encuentro? (1): %s\t(2): %s\t(3): Empataron\n", torneo->equipos[indE1].nombre, torneo->equipos[indE2].nombre);
         entrada = leerEntero("Ingresa una opcion: ", NULL);
         if(!(entrada >= 1 && entrada <= 3))
-            printf("Opcion invalida\n");
+            printf("QOpcion invalida\n");
     }while(!(entrada >= 1 && entrada <= 3));
     if(entrada == 1){ 
         torneo->equipos[indE1].pts += (torneo->equipos[indE1].locOVis == 1)? 2:3;
@@ -93,20 +94,27 @@ void leerEquipos(struct Equipo e[], int nEquipos){
         e[k] = leer(sIngresoEquipo);
     }
 }
-
 int main(void) {
     int entrada;
     // struct Equipo local, visitante;
     // local = leer("Equipo local");
     // visitante = leer("Equipo visitante");    
     struct Torneo torneo;
-    
-    leerEquipos(torneo.equipos, NEQUIPOS);
-    actualizarPromediosTorneo(&torneo);
+    printf("DEP: contador arch %d", contadorBytesArch(RUTA_ARCHIVO));
+    if(contadorBytesArch(RUTA_ARCHIVO)==0 || contadorBytesArch(RUTA_ARCHIVO) == -1){
+        leerEquipos(torneo.equipos, NEQUIPOS);
+        actualizarPromediosTorneo(&torneo);
+        update(RUTA_ARCHIVO, &torneo, sizeof(struct Torneo), 1);
+        depVerifEscCorrecta();
+    } else {
+        select(RUTA_ARCHIVO, &torneo, sizeof(struct Torneo), 1);
+        printf("\nDEP:\n");
+        imprimirEquipos(&torneo, IMP_NORMAL);
+    }
 
     dLineaHoriz('-');
     do{
-        printf("\n(0) Salir\n(1) Registrar partido\n(2) Solo imprimir equipos\n");
+        printf("\n(0) Salir\n(1) Registrar partido\n(2) Imprimir equipos tabla original\n(3) Imprimir equipos ordenados por puntaje\n");
         entrada = leerEntero("Ingresa una opcion: ", NULL);
         bufferflush();
         switch (entrada){
@@ -115,13 +123,18 @@ int main(void) {
                 break;
             case 1:
                 registrarPartido(&torneo);
+                update(RUTA_ARCHIVO, &torneo, sizeof(struct Torneo), 1);
+                depVerifEscCorrecta();
             case 2:
                 dLineaHoriz('-');
-                imprimirEquipos(&torneo);
+                imprimirEquipos(&torneo, IMP_NORMAL);
                 dLineaHoriz('-');
                 break;
+            case 3: //Impresión de equipos especial
+                imprimirEquipos(&torneo, IMP_ORDEN);
+                break;
             default:
-                printf("Opcion invalida\n");
+                printf("aaOpcion invalida\n");
         }
     }while(entrada != 0);
     return 0;

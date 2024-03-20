@@ -46,15 +46,40 @@ void imprime(struct Equipo e, int n){
     printf("| %02d | %3s | %-20s | %3d | %3d | %3d | %3d | %03.2f%% |\n", n+1, (e.locOVis==1)? "loc":"vis", e.nombre, e.pts, e.juegosGanados, e.juegosPerdidos, e.juegosEmpatados, efectividad(e));
     printf("+----+-----+----------------------+-----+-----+-----+-----+--------+\n");
 }
-void imprimirEquipos(struct Torneo *t){
-    int k;
+void imprimirEquipos(struct Torneo *t, int tipo_imp){
+    int ciclos, k;
     struct Equipo *eMP;
     struct Equipo *emP;
+    struct Torneo tTemp;
+    struct Equipo temp;
+    tTemp = *t;
+
     //Depliegue encabezado
     encabezado();
-    for (k=0; k<NEQUIPOS; k++){
-        imprime(t->equipos[k], k);
+
+    //Impresión equipos IMP_NORM
+    if(tipo_imp == IMP_NORMAL){
+        for (k=0; k<NEQUIPOS; k++)
+            imprime(t->equipos[k], k);
+    } else { //Ímpresión equipos IMP_ORD
+        //Ordenamiento Burbuja invertida
+        for(ciclos = 1; ciclos < NEQUIPOS; ciclos++){
+            for(k=0; k<NEQUIPOS-1; k++){ //En menos 1 como maximo, por la notacion de arreglo que admite hasta el indice [n-1]
+                if(tTemp.equipos[k].pts < tTemp.equipos[k+1].pts){
+                    intercambioPosEquipos(&tTemp, &temp, k);
+                } else if(tTemp.equipos[k].pts == tTemp.equipos[k+1].pts){
+                    if(tTemp.equipos[k].juegosPerdidos > tTemp.equipos[k+1].juegosPerdidos)
+                        intercambioPosEquipos(&tTemp, &temp, k);
+                    else if(tTemp.equipos[k].juegosPerdidos == tTemp.equipos[k+1].juegosPerdidos)
+                        if(tTemp.equipos[k].juegosGanados < tTemp.equipos[k+1].juegosGanados)
+                            intercambioPosEquipos(&tTemp, &temp, k);
+                }
+            }
+        }
+        for (k=0; k<NEQUIPOS; k++)
+            imprime(tTemp.equipos[k], k);
     }
+    
     //IMPRIME PROMEDIOS GENERALES
     printf("| %31s |% 3.1f |% 3.1f |% 3.1f |% 3.1f |        |\n", "PROMEDIOS", t->promPTS, t->promJG, t->promJP, t->promJE);
     printf("+----+-----+----------------------+-----+-----+-----+-----+--------+\n");
@@ -71,4 +96,9 @@ void imprimirEquipos(struct Torneo *t){
     printf("| %30s  | %30s |\n", eMP->nombre, emP->nombre);
     printf("+----+-----+----------------------+-----+-----+-----+-----+--------+\n");
 
+}
+void intercambioPosEquipos(struct Torneo *t, struct Equipo *temp, int k){
+    *temp = t->equipos[k];
+    t->equipos[k] = t->equipos[k+1];
+    t->equipos[k+1] = *temp;
 }
