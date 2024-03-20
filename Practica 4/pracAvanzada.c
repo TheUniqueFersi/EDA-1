@@ -100,6 +100,7 @@ int main(void) {
     // local = leer("Equipo local");
     // visitante = leer("Equipo visitante");    
     struct Torneo torneo;
+    
     leerEquipos(torneo.equipos, NEQUIPOS);
     actualizarPromediosTorneo(&torneo);
 
@@ -125,6 +126,14 @@ int main(void) {
     }while(entrada != 0);
     return 0;
 }
+//Lea de archivos
+// Por ende necesitamos funciones que:
+// Carguen valores desde un archivo -> Binario, jale las estructuras y las asigne a structs del codigo
+// Escriban en un archivo -> structs del codigo las cargue en binario al archivo
+
+// Si está vacío, entonces llenamos los equipos, caso contrario nos vamos directo a los partidos.
+
+// Opcion 3 es la opcion de imprimir ordenados como lo indica el profe
 
 
 // void imprime (struct Equipo e){
