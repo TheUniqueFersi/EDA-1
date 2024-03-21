@@ -8,12 +8,17 @@ struct Equipo leer (char texto []){
     printf("Nombre? ");
     //fflush(stdin); //Al no ser estándar, se propone la siguiente linea
     //gets(e.nombre);
+
+
     fgets(e.nombre, MAXs, stdin);
     
     printf("Puntaje? ");
+    
     scanf("%d", &e.pts);
     bufferflush();
     rem1SaltoLinea(e.nombre);
+
+
 
     //Lectura de partidas:
     e.juegosGanados = leerEntero("Partidas ganadas: ", "-- Se esperaba un entero, intenta de nuevo\n");

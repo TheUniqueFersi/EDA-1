@@ -48,7 +48,12 @@ int ctoi(char caracter){
     return caracter - 48;
 }
 
+void leerCadena(char *destino, int max, FILE *arch){
+    fgets(destino, max, arch);
+    //Tenga salto que remover
 
+    //Que no tenga salto que remover
+}
 
 //Nuevas (Esta práctica)
 void rem1SaltoLinea(char * cadena){

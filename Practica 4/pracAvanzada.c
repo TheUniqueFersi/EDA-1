@@ -22,7 +22,7 @@ int entradaEquipoExistente(char * cadena, char *mensaje){
         //entrada = (!isANumber(cadena1))? retorno:stoi(cadena1);
             //entrada = stoi(cadena);
         entrada = atoi(cadena);
-        printf("DEP : stoi %d", entrada);
+        //printf("DEP : stoi %d", entrada);
         if(!(entrada>=1 && entrada<=NEQUIPOS))
             printf("Ese equipo no existe, ingresa (1-10) o su nombre - \n");
     }while(!(entrada>=1 && entrada<=NEQUIPOS));
@@ -100,7 +100,7 @@ int main(void) {
     // local = leer("Equipo local");
     // visitante = leer("Equipo visitante");    
     struct Torneo torneo;
-    printf("DEP: contador arch %d", contadorBytesArch(RUTA_ARCHIVO));
+    //printf("DEP: contador arch %d", contadorBytesArch(RUTA_ARCHIVO));
     if(contadorBytesArch(RUTA_ARCHIVO)==0 || contadorBytesArch(RUTA_ARCHIVO) == -1){
         leerEquipos(torneo.equipos, NEQUIPOS);
         actualizarPromediosTorneo(&torneo);
@@ -108,7 +108,6 @@ int main(void) {
         depVerifEscCorrecta();
     } else {
         select(RUTA_ARCHIVO, &torneo, sizeof(struct Torneo), 1);
-        printf("\nDEP:\n");
         imprimirEquipos(&torneo, IMP_NORMAL);
     }
 

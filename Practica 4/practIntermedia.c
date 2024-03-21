@@ -21,7 +21,7 @@ int entradaEquipoExistente(char * cadena, char *mensaje){
         //entrada = (!isANumber(cadena1))? retorno:stoi(cadena1);
             //entrada = stoi(cadena);
         entrada = atoi(cadena);
-        printf("DEP : stoi %d", entrada);
+        //printf("DEP : stoi %d", entrada);
         if(!(entrada>=1 && entrada<=NEQUIPOS))
             printf("Ese equipo no existe, ingresa (1-10) o su nombre - \n");
     }while(!(entrada>=1 && entrada<=NEQUIPOS));

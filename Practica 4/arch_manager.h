@@ -4,7 +4,7 @@
 #define LECT_A_BIN_PLUS "ab+"
 #define DEFAULT 0
 #define DEPUR 1 //definir en 0 si se requiere que los mensajes de depuracion se desactiven
-#define RUTA_ARCHIVO "./data/equipos.dat"
+#define RUTA_ARCHIVO "./equipos.dat"
 int contadorBytesArch(char *ruta);
 FILE *manejarAperturaArchivo(char *ruta, char *t_apertura);
 int select(char *ruta, void *registro_en_codigo, size_t tam_elem, size_t num_elem);

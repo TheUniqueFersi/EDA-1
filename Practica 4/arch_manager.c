@@ -40,7 +40,6 @@ int update(char *ruta, void *registro_en_codigo, size_t tam_elem, size_t num_ele
 void depVerifEscCorrecta(){
     struct Torneo t;
     select(RUTA_ARCHIVO, &t, sizeof(struct Torneo), 1);
-    printf("\nDEP: \n");
     imprimirEquipos(&t, IMP_NORMAL);
 }
 //Al no tener la posibilidad de eliminar registros, no se preocupa, por ahora, de idear una manera 
