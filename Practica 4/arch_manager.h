@@ -2,7 +2,6 @@
 #define LECT_BIN "rb"
 #define LECT_BIN_PLUS "rb+"
 #define LECT_A_BIN_PLUS "ab+"
-#define DEFAULT 0
 #define DEPUR 1 //definir en 0 si se requiere que los mensajes de depuracion se desactiven
 #define RUTA_ARCHIVO "./equipos.dat"
 int contadorBytesArch(char *ruta);

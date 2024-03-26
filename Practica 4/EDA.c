@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include "EDA.h"
+#include "pI-torneo.h"
 //=== Previas ===
 
 void bufferflush(){
@@ -25,7 +27,8 @@ int leerEntero(char * mensajeEntrada, char * mensajeError){
     return entrada;
 }
 // stringManipulation.h
-int strlenMX(char * s){//Es lo mismo que 'char s[]'
+//Devuelve la longitud de la cadena sin contemplar el salto de linea
+int strlenEDA(char * s){//Es lo mismo que 'char s[]'
     int n;
     n=0;
     while(s[n]!=0 && s[n]!='\n')
@@ -48,11 +51,39 @@ int ctoi(char caracter){
     return caracter - 48;
 }
 
-void leerCadena(char *destino, int max, FILE *arch){
-    fgets(destino, max, arch);
-    //Tenga salto que remover
+//PROTO - FUNCION
+int sfirstC(char *cadena, char car, int longitud) //String First Coincidence
+{
+    int coincidencia, k;
+    for(k=0, coincidencia=0;k<longitud;k++){
+        if(cadena[k]==car){
+            coincidencia=k;
+            k=longitud;
+        }
+    }
+    return (coincidencia==0)? -1: coincidencia;
+}
 
-    //Que no tenga salto que remover
+//NUEVA
+
+int leerCadena(char *destino, int max, int remover){
+    int overflow, nCaracter;
+    nCaracter = 0;
+    do{
+        do{
+            destino[nCaracter] = getchar();
+            nCaracter++;
+        } while(destino[nCaracter-1]!='\n' && nCaracter < (max-1));
+        destino[nCaracter] = 0;
+        if(nCaracter>=(max-1)){
+            bufferflush();
+            overflow = true;
+        } else 
+            overflow = false;
+        if(remover == true)
+            rem1SaltoLinea(destino);
+    } while(strlenEDA(destino) == 0);
+    return overflow;
 }
 
 //Nuevas (Esta práctica)

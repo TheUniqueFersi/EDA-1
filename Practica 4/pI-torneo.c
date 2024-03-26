@@ -10,20 +10,18 @@ struct Equipo leer (char texto []){
     //gets(e.nombre);
 
 
-    fgets(e.nombre, MAXs, stdin);
+    //fgets(e.nombre, MAXs, stdin);
+    leerCadena(e.nombre, MAXs, true);
     
     printf("Puntaje? ");
     
     scanf("%d", &e.pts);
-    bufferflush();
-    rem1SaltoLinea(e.nombre);
-
-
+    e.pts = leerEntero("Ingresa un puntaje", DEFAULT);
 
     //Lectura de partidas:
-    e.juegosGanados = leerEntero("Partidas ganadas: ", "-- Se esperaba un entero, intenta de nuevo\n");
-    e.juegosPerdidos = leerEntero("Partidas perdidas: ", "-- Se esperaba un entero, intenta de nuevo\n");
-    e.juegosEmpatados = leerEntero("Partidas empatadas: ", "-- Se esperaba un entero, intenta de nuevo\n");
+    e.juegosGanados = leerEntero("Partidas ganadas: ", DEFAULT);
+    e.juegosPerdidos = leerEntero("Partidas perdidas: ", DEFAULT);
+    e.juegosEmpatados = leerEntero("Partidas empatadas: ", DEFAULT);
 
     do{
         e.locOVis = leerEntero("Ingresa '1' si el equipo es local, '2' si es visitante: ", NULL);
