@@ -66,10 +66,11 @@ int sfirstC(char *cadena, char car, int longitud) //String First Coincidence
 
 //NUEVA
 
-int leerCadena(char *destino, int max, int remover){
+int leerCadena(char *destino, int max, int remover, char *mensajeError){
     int overflow, nCaracter;
-    nCaracter = 0;
+    char *mnsjError = (mensajeError == NULL)? "Ingrese de nuevo (la cadena no puede estar vacia): ": mensajeError;
     do{
+        nCaracter = 0;
         do{
             destino[nCaracter] = getchar();
             nCaracter++;
@@ -82,6 +83,8 @@ int leerCadena(char *destino, int max, int remover){
             overflow = false;
         if(remover == true)
             rem1SaltoLinea(destino);
+        if(strlenEDA(destino) == 0)
+            printf("%s", mnsjError);
     } while(strlenEDA(destino) == 0);
     return overflow;
 }
@@ -103,7 +106,7 @@ void rem1SaltoLinea(char * cadena){
 int stoi(char * cadena){//stringToInt
     int longitud, k, numeroEntero, maxIntPosible, iInicioNumero;
     int ciclos, ciclosN, p=0;
-    longitud=strlenMX(cadena);
+    longitud=strlenEDA(cadena);
     k=0;
     numeroEntero=0;
     iInicioNumero=0;

@@ -1,6 +1,6 @@
 #define true 1
 #define false 0
-#define DEFAULT 0
+#define DEFAULT ((void *)0)
 void bufferflush();
 int leerEntero(char * mensajeEntrada, char * mensajeError);
 
@@ -12,5 +12,5 @@ int stoi(char *cadena);
 //PROTOFUNCION
 int sfirstC(char * cadena, char car, int longitud);
 
-int leerCadena(char *destino, int max, int remover);
+int leerCadena(char *destino, int max, int remover, char *mensajeError);
 void rem1SaltoLinea(char * cadena);
