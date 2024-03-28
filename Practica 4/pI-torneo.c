@@ -8,20 +8,16 @@ struct Equipo leer (char texto []){
     printf("Ingresa el nombre del equipo: ");
     leerCadena(e.nombre, MAXs, true, DEFAULT);
     e.pts = leerEntero("Ingresa un puntaje: ", DEFAULT);
-
     //Lectura de partidas:
     e.juegosGanados = leerEntero("Partidas ganadas: ", DEFAULT);
     e.juegosPerdidos = leerEntero("Partidas perdidas: ", DEFAULT);
     e.juegosEmpatados = leerEntero("Partidas empatadas: ", DEFAULT);
-
     do{
         e.locOVis = leerEntero("Ingresa '1' si el equipo es local, '2' si es visitante: ", NULL);
         if(e.locOVis != 1 && e.locOVis != 2)
             printf("Opcion invalida\n");
     }while(e.locOVis != 1 && e.locOVis != 2);
     bufferflush();
-
-
     return e;
 }
 float efectividad(struct Equipo e){
