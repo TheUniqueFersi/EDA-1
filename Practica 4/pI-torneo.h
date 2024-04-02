@@ -1,5 +1,5 @@
 #define MAXs 10
-#define NEQUIPOS 1
+#define NEQUIPOS 10
 #define IMP_NORMAL 0
 #define IMP_ORDEN 1
 struct Equipo {

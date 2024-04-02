@@ -77,8 +77,10 @@ int leerCadena(char *destino, int max, int remover, char *mensajeError){
         } while(destino[nCaracter-1]!='\n' && nCaracter < (max-1));
         destino[nCaracter] = 0;
         if(nCaracter>=(max-1)){
-            bufferflush();
-            overflow = true;
+            if(destino[nCaracter-1]!='\n'){
+                bufferflush();
+                overflow = true;
+            }
         } else 
             overflow = false;
         if(remover == true)
