@@ -1,4 +1,3 @@
-//#include "nodo.h"
 struct nodo{
     char * nombre;
     struct nodo *ant, *sig;

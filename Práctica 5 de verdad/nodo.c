@@ -24,17 +24,16 @@ NODO *nuevoNodo(char *nombre){
 void imprimeNodo(NODO n){
     printf("%s\n", n.nombre);
 }
-void agregarNodoFinal(LISTA *l, NODO *n){
+void agregarNodoFinal(LISTA *lista, NODO *n){
     NODO *q;
-    if(l != NULL && n != NULL){
-        if(l->t==NULL){
-            //NODO *nNodo = nuevoNodo(leerCadena());
-            l->h = n;
-            l->t=l->h;
+    if(lista != NULL && n != NULL){
+        if(estaVacia(lista)){
+            lista->h = n;
+            lista->t=lista->h;
         } else {        
-            q = l->t;
+            q = lista->t;
             q->sig = n;
-            l->t = n;
+            lista->t = n;
         }
     } else {
         printf("Datos incorrectos");

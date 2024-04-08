@@ -1,10 +1,9 @@
 # PRÁCTICA 5
 ## lista doblemene ligada:
 - Agregar al final
-- Borrar del inicio
-- Recorrer la lista
+- Recorrer la lista (Mostrar elementos de la lista) para imprimir valores
+- Borrar donde sea
 
-- para imprimir valores
 
 
 
