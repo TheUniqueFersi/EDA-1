@@ -5,34 +5,19 @@
 struct Equipo leer (char texto []){
     struct Equipo e;
     printf("\n%s\n\n", texto);
-    printf("Nombre? ");
-    //fflush(stdin); //Al no ser estándar, se propone la siguiente linea
-    //gets(e.nombre);
-
-
-    fgets(e.nombre, MAXs, stdin);
-    
-    printf("Puntaje? ");
-    
-    scanf("%d", &e.pts);
-    bufferflush();
-    rem1SaltoLinea(e.nombre);
-
-
-
+    printf("Ingresa el nombre del equipo: ");
+    leerCadena(e.nombre, MAXs, true, DEFAULT);
+    e.pts = leerEntero("Ingresa un puntaje: ", DEFAULT);
     //Lectura de partidas:
-    e.juegosGanados = leerEntero("Partidas ganadas: ", "-- Se esperaba un entero, intenta de nuevo\n");
-    e.juegosPerdidos = leerEntero("Partidas perdidas: ", "-- Se esperaba un entero, intenta de nuevo\n");
-    e.juegosEmpatados = leerEntero("Partidas empatadas: ", "-- Se esperaba un entero, intenta de nuevo\n");
-
+    e.juegosGanados = leerEntero("Partidas ganadas: ", DEFAULT);
+    e.juegosPerdidos = leerEntero("Partidas perdidas: ", DEFAULT);
+    e.juegosEmpatados = leerEntero("Partidas empatadas: ", DEFAULT);
     do{
         e.locOVis = leerEntero("Ingresa '1' si el equipo es local, '2' si es visitante: ", NULL);
         if(e.locOVis != 1 && e.locOVis != 2)
             printf("Opcion invalida\n");
     }while(e.locOVis != 1 && e.locOVis != 2);
     bufferflush();
-
-
     return e;
 }
 float efectividad(struct Equipo e){
@@ -67,6 +52,7 @@ void imprimirEquipos(struct Torneo *t, int tipo_imp){
         for (k=0; k<NEQUIPOS; k++)
             imprime(t->equipos[k], k);
     } else { //Ímpresión equipos IMP_ORD
+    
         //Ordenamiento Burbuja invertida
         for(ciclos = 1; ciclos < NEQUIPOS; ciclos++){
             for(k=0; k<NEQUIPOS-1; k++){ //En menos 1 como maximo, por la notacion de arreglo que admite hasta el indice [n-1]
