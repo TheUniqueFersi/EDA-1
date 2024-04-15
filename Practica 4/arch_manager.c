@@ -37,7 +37,7 @@ int update(char *ruta, void *registro_en_codigo, size_t tam_elem, size_t num_ele
     }
     return (arch == NULL)? -1:contadorBytesArch(ruta);
 }
-void depVerifEscCorrecta(){
+void depVerifEscCorrecta(){ 
     struct Torneo t;
     select(RUTA_ARCHIVO, &t, sizeof(struct Torneo), 1);
     imprimirEquipos(&t, IMP_NORMAL);
