@@ -5,10 +5,10 @@ tabla = [[4, 500, 800],
          [3, 400, 900],
          [15, 300, 750],
          [7, 600, 950]]
-
+#ind = {"tramo": 0, "PROD": 1, "VENTA": 2, "RENT": 3, "CPMETRO": 4}
 # ---------------------------------------------------
 # Funciones de llenado de tabla: ... 1)
-def leerEntero(cabecera="un número entero"): # No acepta enteros 0 ni flotantes ni enteros negativos
+def leerEntero(cabecera="un número entero"):
     var = ""
     while type(var) != int:
         var = input(f"Ingresa {cabecera}: ")
@@ -17,8 +17,7 @@ def leerEntero(cabecera="un número entero"): # No acepta enteros 0 ni flotantes
         except ValueError:
             print("Esto no es un entero positivo, intenta de nuevo.")
     return var
-# ---
-#ind = {"tramo": 0, "PROD": 1, "VENTA": 2, "RENT": 3, "CPMETRO": 4}
+
 def imprimirTabla(tabla):
     encabezado = "|Tramo| Precio PROD | Precio Venta |"
     print("-"*len(encabezado), f"\n{encabezado}")
@@ -84,12 +83,12 @@ def obtenerCortes(corteRestante, tabla, resultados):
     corte = 0
     pila = []
     while corteRestante != 0 and corte != len(tabla):
-        print()
         posiblesCortes = int(corteRestante/tabla[corte][0])
         if posiblesCortes == 0:
             if len(pila) > 0:
                 ultimoCorte = pila.pop()
                 resultados[ultimoCorte] -= 1
+                resultados["rentabilidad"] -= tabla[corte-1][3]
                 corteRestante+=ultimoCorte
             else: 
                 corte+=1
@@ -99,9 +98,8 @@ def obtenerCortes(corteRestante, tabla, resultados):
                 pila.append(tabla[corte][0])
                 resultados[tabla[corte][0]] = resultados[tabla[corte][0]]+1 if resultados.get(tabla[corte][0]) else 1
                 resultados["rentabilidad"] += tabla[corte][3]
-            corte+=1
-    return -1 if len(resultados) == 1 else 0
-
+            corte+=1    
+    return -1 if corteRestante!=0 else 0
 def solicitarCorte(resultado, tablaOrdenada):
     resultado = {"rentabilidad": 0}
     barra = 0
@@ -119,7 +117,9 @@ def solicitarCorte(resultado, tablaOrdenada):
                                                 tablaOrdenada[i][0]))
         print(f"Con una rentabilidad de ${resultado["rentabilidad"]}")
     else: print("¡¡¡ No hay solución para la barra proporcionada !!!")
-
+print("="*25)
+print("Bienvenido a este programa donde aseguras la mayor rentabilidad de una barra dados unos cortes indivisibles")
+separador("-")
 bucle = ""
 resultado = {}
 tabla = llenarTabla()
