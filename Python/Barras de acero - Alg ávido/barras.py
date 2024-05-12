@@ -9,27 +9,18 @@ tabla = [[4, 500, 800],
 # ---------------------------------------------------
 # Funciones de llenado de tabla: ... 1)
 # Función para llenar la tabla 
-# Funcion para ingresar un entero solamente Wii
-
-def leerEnteroParaTabla(cabecera): # No acepta enteros 0 ni flotantes ni enteros negativos
+def leerEntero(cabecera="un número entero"): # No acepta enteros 0 ni flotantes ni enteros negativos
     var = ""
-    bandera_positiva = False
     n = 0
-    while type(var) != int or bandera_positiva == False:
-        print(f"iteracion {n}",bandera_positiva)
+    while type(var) != int:
+        #print(f"iteracion {n}",bandera_positiva)
         n+=1
         var = input(f"Ingresa {cabecera}: ")
         try:
             var = int(var)
-            if var > 0 or var == -1:
-                bandera_positiva = True
-            elif var == 0:
-                print("Ingresa un número mayor a cero\n")
-            else:
-                print("El número proporcionado no puede ser negativo\n")
         except ValueError:
             print("Esto no es un entero positivo, intenta de nuevo.")
-        print(f"iteracion {n}",bandera_positiva)
+        #print(f"iteracion {n}",bandera_positiva)
     return var
 # ---
 ind = {"tramo": 0, "PROD": 1, "VENTA": 2, "RENT": 3, "CPMETRO": 4}
@@ -50,6 +41,7 @@ def llenarTabla():
                 print("Has indicado la finalización del llenado de la tabla")
             else:
                 print("Debes ingresar al menos 3 valores a comparar (3 filas)")
+    return tabla
         
 def crearFila(solicitud):
     fila = []
@@ -57,7 +49,15 @@ def crearFila(solicitud):
     retorno = fila
     i = 0
     while i<3 and bandera != False: 
-        valor = leerEnteroParaTabla(solicitud[i])
+        valorvalido = False
+        while valorvalido == False:
+            valor = leerEntero(solicitud[i])
+            if valor > 0 or valor == -1:
+                valorvalido = True
+            elif valor == 0:
+                print("Ingresa un número mayor a cero\n")
+            else:
+                print("El número proporcionado no puede ser negativo\n")
         bandera = True if valor != -1 else False
         if bandera != False:
             fila.append(valor)
@@ -67,15 +67,21 @@ def crearFila(solicitud):
     print(retorno)
     return retorno
 
-llenarTabla()
+#tabla = llenarTabla()
 # ---------------------------------------------------
 # Funciones de Ordenado de datos ... 2)
 
+print(F"La tabla final es: {tabla}")
+def ordenarMejorCaso(tablaOrig):
+    for fila in tablaOrig:
+        fila.append(fila[2]-fila[1])
+        fila.append(fila[3]/fila[0])
+    return sorted(tabla, key=lambda x: x[4], reverse=True)
 
+tablaOrdenada = ordenarMejorCaso(tabla)
+print(tablaOrdenada)
 # ---------------------------------------------------
 # Funciones de resolución respecto a barras ... 3)
-    
-    
 
   
 # indicador = ""
