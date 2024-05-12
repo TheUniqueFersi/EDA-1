@@ -82,6 +82,17 @@ tablaOrdenada = ordenarMejorCaso(tabla)
 print(tablaOrdenada)
 # ---------------------------------------------------
 # Funciones de resolución respecto a barras ... 3)
+resultado = {"rentabilidad": 0}
+valido = False
+while valido != True:
+    barra = leerEntero("el tamaño de una barra")
+    if barra <=0:
+        print("Ingresa un valor de barra válido")
+    else:
+        valido = True
+print(barra)
+#for caso in tablaOrdenada:
+
 
   
 # indicador = ""
