@@ -23,7 +23,7 @@ def leerEntero(cabecera="un número entero"): # No acepta enteros 0 ni flotantes
         #print(f"iteracion {n}",bandera_positiva)
     return var
 # ---
-ind = {"tramo": 0, "PROD": 1, "VENTA": 2, "RENT": 3, "CPMETRO": 4}
+#ind = {"tramo": 0, "PROD": 1, "VENTA": 2, "RENT": 3, "CPMETRO": 4}
 def llenarTabla():
     tabla = []
     solicitudes = ['el tramo del corte', 
@@ -42,7 +42,6 @@ def llenarTabla():
             else:
                 print("Debes ingresar al menos 3 valores a comparar (3 filas)")
     return tabla
-        
 def crearFila(solicitud):
     fila = []
     bandera = True
@@ -67,37 +66,78 @@ def crearFila(solicitud):
     print(retorno)
     return retorno
 
-#tabla = llenarTabla()
 # ---------------------------------------------------
 # Funciones de Ordenado de datos ... 2)
-
-print(F"La tabla final es: {tabla}")
 def ordenarMejorCaso(tablaOrig):
     for fila in tablaOrig:
         fila.append(fila[2]-fila[1])
         fila.append(fila[3]/fila[0])
     return sorted(tabla, key=lambda x: x[4], reverse=True)
-
-tablaOrdenada = ordenarMejorCaso(tabla)
-print(tablaOrdenada)
 # ---------------------------------------------------
 # Funciones de resolución respecto a barras ... 3)
-resultado = {"rentabilidad": 0}
-valido = False
-while valido != True:
-    barra = leerEntero("el tamaño de una barra")
-    if barra <=0:
-        print("Ingresa un valor de barra válido")
+def separador(char):
+    print(char*50)
+def obtenerCortes(corteRestante, tabla, resultados):
+    corte = 0
+    pila = []
+    while corteRestante != 0 and corte != len(tabla):
+        print()
+        posiblesCortes = int(corteRestante/tabla[corte][0])
+        if posiblesCortes == 0:
+            print(f"no se puede {tabla[corte][0]}")
+            if len(pila) > 0:
+                ultimoCorte = pila.pop()
+                resultados[ultimoCorte] -= 1
+                corteRestante+=ultimoCorte
+            else: 
+                corte+=1
+        else: 
+            for i in range(posiblesCortes):
+                corteRestante -= tabla[corte][0]
+                pila.append(tabla[corte][0])
+                resultados[tabla[corte][0]] = resultados[tabla[corte][0]]+1 if resultados.get(tabla[corte][0]) else 1
+                resultados["rentabilidad"] += tabla[corte][3]
+            corte+=1
+        print(pila, corteRestante, resultados)
+    return -1 if len(resultados) == 0 else 0
+
+def solicitarCorte(resultado, tablaOrdenada):
+    resultado = {"rentabilidad": 0}
+    barra = 0
+    while barra <=0 :
+        barra = leerEntero("el tamaño de una barra")
+        if barra <=0:
+            print("Ingresa un valor de barra válido")
+    print(barra)
+    if obtenerCortes(barra, tablaOrdenada, resultado) == 0:
+        print(f"Para cortar una barra de {barra}[m] y tener la mejor rentabilidad, se debe cortar de la siguiente forma:")
+        for i in range(len(tablaOrdenada)):
+            print(tablaOrdenada[i][0])
+            corte = resultado.get(tablaOrdenada[i][0])
+            if corte:
+                print("{} corte{} de {}".format(tablaOrdenada[i][0], 
+                                                's' if corte > 1 else '', 
+                                                corte))
+        print(f"Con una rentabilidad de ${resultado["rentabilidad"]}")
+    else: print("¡¡¡ No hay solución para la barra proporcionada !!!")
+    print(resultado, barra)
+
+
+bucle = ""
+resultado = {}
+#tabla = llenarTabla()
+print(F"La tabla final es: {tabla}")
+tablaOrdenada = ordenarMejorCaso(tabla)
+print("La tabla ordenada es: {}".format(tablaOrdenada))
+solicitarCorte(resultado, tablaOrdenada)
+while bucle.lower() != "no":
+    print("\n")
+    separador('-')
+    bucle = input("¿Deseas calcular otra rentabilidad? (Si/No): ")
+    if(bucle.lower() == "no"):
+        print("¡Gracias por usar este programa!\n---Elaborado por: López Morales Fernando Samuel---")
+        separador('=')
+    elif bucle.lower() == "si": 
+        solicitarCorte(resultado, tablaOrdenada)
     else:
-        valido = True
-print(barra)
-#for caso in tablaOrdenada:
-
-
-  
-# indicador = ""
-# barra = 40
-# dicc = {"hola": "s"}
-# print(f"{dicc['hola']}")
-# for n in range (5):
-#     print(f"{tabla[n]}, {type(tabla[n])}")
+        print("Opción no válida, ingrese de nuevo")
