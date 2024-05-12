@@ -11,52 +11,71 @@ tabla = [[4, 500, 800],
 # Función para llenar la tabla 
 # Funcion para ingresar un entero solamente Wii
 
-def leerEnteroParaTabla(cabecera, excepcion="-1"): # No acepta enteros 0 ni flotantes ni enteros negativos
+def leerEnteroParaTabla(cabecera): # No acepta enteros 0 ni flotantes ni enteros negativos
     var = ""
     bandera_positiva = False
-    while type(var) != int and bandera_positiva == False:
-        var = input(f"Ingresa {cabecera}")
-        if(var != excepcion):
-            try: 
-                var = int(var)
-                if var > 0:
-                    bandera_positiva = True
-                elif var == 0:
-                    print("Ingresa un número mayor a cero\n")
-                else:
-                    print("El número proporcionado no puede ser negativo\n")
-            except ValueError:
-                print("Esto no es un entero positivo, intenta de nuevo.")
-        else:
-            var = -1
+    n = 0
+    while type(var) != int or bandera_positiva == False:
+        print(f"iteracion {n}",bandera_positiva)
+        n+=1
+        var = input(f"Ingresa {cabecera}: ")
+        try:
+            var = int(var)
+            if var > 0 or var == -1:
+                bandera_positiva = True
+            elif var == 0:
+                print("Ingresa un número mayor a cero\n")
+            else:
+                print("El número proporcionado no puede ser negativo\n")
+        except ValueError:
+            print("Esto no es un entero positivo, intenta de nuevo.")
+        print(f"iteracion {n}",bandera_positiva)
     return var
 # ---
 ind = {"tramo": 0, "PROD": 1, "VENTA": 2, "RENT": 3, "CPMETRO": 4}
-tabla = []
 def llenarTabla():
     tabla = []
-    solicitud = ['el tramo del corte', 
+    solicitudes = ['el tramo del corte', 
                    'su precio de producción',
-                   'su percio de venta']
-    valor = ""
-    while bandera != False:
-        fila = []
-        bandera = False
-        for i in range(3):
-            valor = leerEnteroParaTabla(solicitud[i])
-            if valor == -1:
+                   'su precio de venta']
+    bandera = False
+    while bandera != True:
+        print(f"la tabla es: {tabla}")
+        protolista = crearFila(solicitudes)
+        if type(protolista) == list:
+            tabla.append(protolista)
+        else:
+            if len(tabla) >= 3:
                 bandera = True
+                print("Has indicado la finalización del llenado de la tabla")
+            else:
+                print("Debes ingresar al menos 3 valores a comparar (3 filas)")
+        
+def crearFila(solicitud):
+    fila = []
+    bandera = True
+    retorno = fila
+    i = 0
+    while i<3 and bandera != False: 
+        valor = leerEnteroParaTabla(solicitud[i])
+        bandera = True if valor != -1 else False
+        if bandera != False:
+            fila.append(valor)
+            i+=1
+        else:
+            retorno = -1
+    print(retorno)
+    return retorno
 
-        if()
-
+llenarTabla()
 # ---------------------------------------------------
 # Funciones de Ordenado de datos ... 2)
-crearTabla()
+
 
 # ---------------------------------------------------
 # Funciones de resolución respecto a barras ... 3)
     
-    llenarFila()
+    
 
   
 # indicador = ""
